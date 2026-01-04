@@ -1,0 +1,22 @@
+:host {
+  display: grid;
+  grid-template-areas: 
+    'name name'
+    'rating rating'
+    'ingredients-heading directions-heading'
+    'ingredients directions';
+  grid-template-columns: '1fr 1fr';
+  grid-template-rows: 1fr 1fr 1fr 7fr;
+
+  .name { grid-area: name }
+  .rating { grid-area: rating }
+  .ingredients-heading { grid-area: ingredients-heading }
+  .directions-heading { grid-area: directions-heading }
+  .ingredients { grid-area: ingredients }
+  .directions { grid-area: directions }
+
+  > * {
+    border: 1px solid red;
+    margin: 0px;
+  }
+}
