@@ -1,0 +1,30 @@
+<h3 class="name">{{recipe().name}}</h3>
+<p class="rating">Rating: {{recipe().rating}}/5</p>
+
+<h4 class="ingredients-heading">Ingredients</h4>
+<ul class="ingredients">
+  @for (s of recipe().sections; track $index) {
+    <li class="section">
+      <h5 class="name">{{s.name}}</h5>
+      <ul class="ingredients">
+        @for (i of s.ingredients; track $index) {
+          <li class="ingredient">{{i.quantity}} {{i.unit}} of {{i.name}}</li>
+        }
+      </ul>
+    </li>
+  }
+</ul>
+
+<h4 class="directions-heading">Directions</h4>
+<ul class="directions">
+  @for (s of recipe().sections; track $index) {
+    <li class="section">
+      <h5 class="name">{{s.name}}</h5>
+      <ul class="directions">
+        @for (d of s.directions; track $index) {
+          <li class="direction">{{d}}</li>
+        }
+      </ul>
+    </li>
+  }
+</ul>
