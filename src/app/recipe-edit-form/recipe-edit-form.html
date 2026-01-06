@@ -20,18 +20,34 @@
 
         <div class="ingredients" formArrayName="ingredients">
           @for (i of recipeForm.controls.sections.at(sIndex)?.controls?.ingredients?.controls; let iIndex = $index; track iIndex) {
-            <label for="ingredient">Ingredient: </label>
-            <input type="text" class="ingredient" [formControlName]="iIndex">
-            <button type="button" (click)="removeIngredient(sIndex, iIndex)">X</button>
+            <div [formGroupName]="iIndex">
+              <div class="field">
+                <label for="quantity">Quantity: </label>
+                <input type="number" formControlName="quantity">
+              </div>
+              <div class="field">
+                <label for="unit">Unit: </label>
+                <input type="text" formControlName="unit">
+              </div>
+              <div class="field">
+                <label for="name">Ingredient: </label>
+                <input type="text" class="ingredient" formControlName="name">
+              </div>
+              <button type="button" (click)="removeIngredient(sIndex, iIndex)">X</button>
+            </div>
           }
           <button type="button" (click)="addIngredient(sIndex)">Add Ingredient</button>
         </div>
 
         <div class="directions" formArrayName="directions">
           @for (d of recipeForm.controls.sections.at(sIndex)?.controls?.directions?.controls; let dIndex = $index; track dIndex) {
-            <label for="direction">Direction: </label>
-            <input type="text" class="direction" [formControlName]="dIndex">
-            <button type="button" (click)="removeDirection(sIndex, dIndex)">X</button>
+            <div [formGroupName]="dIndex">
+              <div class="field">
+                <label for="direction">Direction: </label>
+                <input type="text" class="direction" formControlName="text">
+              </div>
+              <button type="button" (click)="removeDirection(sIndex, dIndex)">X</button>
+            </div>
           }
           <button type="button" (click)="addDirection(sIndex)">Add Direction</button>
         </div>

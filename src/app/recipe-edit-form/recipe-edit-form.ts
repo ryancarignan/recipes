@@ -2,10 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { Recipe, Section, Ingredient, emptyRecipe } from '../models/recipe'
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, NonNullableFormBuilder } from '@angular/forms'
 
+type IngredientForm = FormGroup<{
+  name: FormControl<string>;
+  unit: FormControl<string>;
+  quantity: FormControl<number>;
+}>;
+
+type DirectionForm = FormGroup<{
+  text: FormControl<string>;
+}>;
+
 type SectionForm = FormGroup<{
   name: FormControl<string>;
-  ingredients: FormArray<FormControl<string>>;
-  directions: FormArray<FormControl<string>>;
+  ingredients: FormArray<IngredientForm>;
+  directions: FormArray<DirectionForm>;
 }>;
 
 type RecipeForm = FormGroup<{
@@ -38,8 +48,8 @@ export class RecipeEditForm implements OnInit {
   generateSection(): SectionForm {
     return this.fb.group({
       name: [''],
-      ingredients: this.fb.array<FormControl<string>>([]),
-      directions: this.fb.array<FormControl<string>>([]),
+      ingredients: this.fb.array<IngredientForm>([]),
+      directions: this.fb.array<DirectionForm>([]),
     });
   }
 
@@ -51,8 +61,12 @@ export class RecipeEditForm implements OnInit {
     this.recipeForm.controls.sections.removeAt(sIndex);
   }
 
-  addIngredient(sIndex: number) {
-    const newIngredient: FormControl<string> = this.fb.control('', { validators: Validators.required });
+  addIngredient(sIndex: number) { // FIXME
+    const newIngredient: IngredientForm = this.fb.group({
+      name: ['', Validators.required],
+      unit: [''],
+      quantity: [1, Validators.required]
+    });
     this.recipeForm.controls.sections.at(sIndex)?.controls?.ingredients.push(newIngredient);
   }
 
@@ -61,7 +75,9 @@ export class RecipeEditForm implements OnInit {
   }
 
   addDirection(sIndex: number) {
-    const newDirection: FormControl<string> = this.fb.control('', { validators: Validators.required });
+    const newDirection: DirectionForm = this.fb.group({
+      text: ['', Validators.required]
+    });
     this.recipeForm.controls.sections.at(sIndex)?.controls?.directions.push(newDirection);
   }
 
