@@ -1,0 +1,46 @@
+<h3>Edit Receipt:</h3>
+
+<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+  <div class="field">
+    <label for="name">Name: </label>
+    <input type="text" formControlName="name">
+  </div>
+  <div class="field">
+    <label for="rating">Rating: </label>
+    <input type="number" formControlName="rating">
+  </div>
+  <div class="sections" formArrayName="sections">
+    @for (s of recipeForm.controls.sections.controls; let sIndex = $index; track sIndex) {
+      <div class="section" [formGroupName]="sIndex">
+
+        <div class="field" >
+          <label for="name">Name: </label>
+          <input type="text" formControlName="name">
+        </div>
+
+        <div class="ingredients" formArrayName="ingredients">
+          @for (i of recipeForm.controls.sections.at(sIndex)?.controls?.ingredients?.controls; let iIndex = $index; track iIndex) {
+            <label for="ingredient">Ingredient: </label>
+            <input type="text" class="ingredient" [formControlName]="iIndex">
+            <button type="button" (click)="removeIngredient(sIndex, iIndex)">X</button>
+          }
+          <button type="button" (click)="addIngredient(sIndex)">Add Ingredient</button>
+        </div>
+
+        <div class="directions" formArrayName="directions">
+          @for (d of recipeForm.controls.sections.at(sIndex)?.controls?.directions?.controls; let dIndex = $index; track dIndex) {
+            <label for="direction">Direction: </label>
+            <input type="text" class="direction" [formControlName]="dIndex">
+            <button type="button" (click)="removeDirection(sIndex, dIndex)">X</button>
+          }
+          <button type="button" (click)="addDirection(sIndex)">Add Direction</button>
+        </div>
+
+        <button type="button" (click)="removeSection(sIndex)">X</button>
+      </div>
+    }
+  </div>
+  <button type="button" (click)="addSection()">Add Section</button>
+
+  <button type="submit">Submit</button>
+</form>

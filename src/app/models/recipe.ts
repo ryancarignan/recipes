@@ -15,3 +15,9 @@ export interface Ingredient {
   unit: string;
   quantity: number;
 }
+
+export const emptyRecipe: Recipe = {
+  name: "",
+  rating: 0,
+  sections: []
+}
