@@ -1,5 +1,41 @@
 :host {
   margin: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  overflow-y: auto;
+  margin: 1rem;
+
+  .heading {
+    position: sticky;
+    top: 0%;
+    left: 50%;
+    width: 100%;
+    background-color: white;
+    border-block-end: 1px solid black;
+    height: 2rem;
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .close {
+      position: absolute;
+      top: 0.25rem;
+      left: 0.25rem;
+    }
+  }
+
+  .ingredients,
+  .directions {
+    width: 100%;
+  }
+
+  .add,
+  .remove,
+  .submit {
+    width: 100%;
+  }
 }
 .recipe {
   display: flex;
@@ -12,13 +48,19 @@
     content: '';
     border: 1px solid black;
     width: 100%;
+    margin-block-end: 0.5rem;
+  }
+  .section:first-of-type::before {
+    content: '';
+    border: 1px solid black;
+    width: 100%;
+    margin-block-start: 0.5%;
   }
   .section {
     display: flex;
     justify-content: space-evenly;
     align-items: flex-start;
     flex-direction: column;
-    width: 150rem;
     gap: 0.5rem;
 
     .ingredients {

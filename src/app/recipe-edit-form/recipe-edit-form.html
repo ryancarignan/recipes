@@ -1,5 +1,9 @@
 @if (beingEdited()) {
-  <h3>Edit Recipe:</h3>
+  <div class="heading">
+    <button type="button" class="close" (click)="close()">X</button>
+    <h3>Edit Recipe:</h3>
+  </div>
+
 
   <form class="recipe" [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
 
@@ -39,10 +43,10 @@
                   <label for="name">Ingredient: </label>
                   <input type="text" class="ingredient" formControlName="name">
                 </div>
-                <button type="button" (click)="removeIngredient(sIndex, iIndex)">X</button>
+                <button class="remove" type="button" (click)="removeIngredient(sIndex, iIndex)">X</button>
               </div>
             }
-            <button type="button" (click)="addIngredient(sIndex)">Add Ingredient</button>
+            <button class="add" type="button" (click)="addIngredient(sIndex)">Add Ingredient</button>
           </div>
 
           <div class="directions" formArrayName="directions">
@@ -52,13 +56,13 @@
                   <label for="direction">Direction: </label>
                   <input type="text" class="direction" formControlName="text">
                 </div>
-                <button type="button" (click)="removeDirection(sIndex, dIndex)">X</button>
+                <button class="remove" type="button" (click)="removeDirection(sIndex, dIndex)">X</button>
               </div>
             }
-            <button type="button" (click)="addDirection(sIndex)">Add Direction</button>
+            <button class="add" type="button" (click)="addDirection(sIndex)">Add Direction</button>
           </div>
 
-          <button type="button" (click)="removeSection(sIndex)">X</button>
+          <button class="remove" type="button" (click)="removeSection(sIndex)">X</button>
         </div>
       }
     </div>

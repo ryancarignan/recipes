@@ -147,4 +147,8 @@ export class RecipeEditForm implements OnInit {
     });
     this.beingEdited.set(false);
   }
+
+  close() {
+    this.beingEdited.set(false);
+  }
 }

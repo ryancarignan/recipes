@@ -10,4 +10,16 @@
   * {
     margin: 0px;
   }
+
+  app-recipe-edit-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 50vw;
+    background-color: white;
+    border: 1px solid black;
+    height: 80vh;
+  }
 }
