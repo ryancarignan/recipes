@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { Recipe } from '../models/recipe';
+import { emptyRecipe, Recipe } from '../models/recipe';
 
 @Component({
   selector: 'app-recipe-card',
@@ -8,11 +8,5 @@ import { Recipe } from '../models/recipe';
   styleUrl: './recipe-card.scss',
 })
 export class RecipeCard {
-  recipe = input<Recipe>(defaultRecipe);
-}
-
-const defaultRecipe: Recipe = {
-  name: "",
-  rating: 0,
-  sections: []
+  recipe = input<Recipe>(emptyRecipe);
 }

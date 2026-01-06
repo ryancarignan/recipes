@@ -2,10 +2,11 @@ import { Component, Signal, signal, WritableSignal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Recipe, Section, Ingredient } from './models/recipe';
 import { RecipeCard } from './recipe-card/recipe-card';
+import { RecipeEditForm } from './recipe-edit-form/recipe-edit-form';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RecipeCard],
+  imports: [RouterOutlet, RecipeCard, RecipeEditForm],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
