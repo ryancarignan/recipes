@@ -1,35 +1,40 @@
-<h3>Edit Receipt:</h3>
+<h3>Edit Recipe:</h3>
 
-<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
-  <div class="field">
+<form class="recipe" [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+
+  <div class="field name">
     <label for="name">Name: </label>
     <input type="text" formControlName="name">
   </div>
-  <div class="field">
+
+  <div class="field rating">
     <label for="rating">Rating: </label>
     <input type="number" formControlName="rating">
   </div>
+
   <div class="sections" formArrayName="sections">
     @for (s of recipeForm.controls.sections.controls; let sIndex = $index; track sIndex) {
       <div class="section" [formGroupName]="sIndex">
 
-        <div class="field" >
+        <div class="field name">
           <label for="name">Name: </label>
           <input type="text" formControlName="name">
         </div>
 
         <div class="ingredients" formArrayName="ingredients">
           @for (i of recipeForm.controls.sections.at(sIndex)?.controls?.ingredients?.controls; let iIndex = $index; track iIndex) {
-            <div [formGroupName]="iIndex">
-              <div class="field">
+            <div class="ingredient" [formGroupName]="iIndex">
+              <div class="field quantity">
                 <label for="quantity">Quantity: </label>
                 <input type="number" formControlName="quantity">
               </div>
-              <div class="field">
+              
+              <div class="field unit">
                 <label for="unit">Unit: </label>
                 <input type="text" formControlName="unit">
               </div>
-              <div class="field">
+
+              <div class="field name">
                 <label for="name">Ingredient: </label>
                 <input type="text" class="ingredient" formControlName="name">
               </div>
@@ -41,8 +46,8 @@
 
         <div class="directions" formArrayName="directions">
           @for (d of recipeForm.controls.sections.at(sIndex)?.controls?.directions?.controls; let dIndex = $index; track dIndex) {
-            <div [formGroupName]="dIndex">
-              <div class="field">
+            <div class="direction" [formGroupName]="dIndex">
+              <div class="field text">
                 <label for="direction">Direction: </label>
                 <input type="text" class="direction" formControlName="text">
               </div>
@@ -56,7 +61,7 @@
       </div>
     }
   </div>
-  <button type="button" (click)="addSection()">Add Section</button>
+  <button class="add" type="button" (click)="addSection()">Add Section</button>
 
-  <button type="submit">Submit</button>
+  <button class="submit" type="submit">Submit</button>
 </form>
