@@ -62,4 +62,9 @@ export class App {
       }
     ]
   }
+  recipes!: Recipe[];
+
+  ngOnInit() {
+    this.recipes = [this.testRecipe, this.testEmptyRecipe];
+  }
 }

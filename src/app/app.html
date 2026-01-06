@@ -1,11 +1,5 @@
 <router-outlet />
-<h2>Default</h2>
-<app-recipe-card [recipe]="testEmptyRecipe"/>
-<hr>
-<h2>Test</h2>
-<app-recipe-card [recipe]="testRecipe"/>
-
-<h2>Empty Form Test</h2>
-<app-recipe-edit-form [(recipe)]="testEmptyRecipe"/>
-<h2>Filled Form Test</h2>
-<app-recipe-edit-form [(recipe)]="testRecipe"/>
+<h2>Recipes</h2>
+@for (r of recipes; track $index) {
+  <app-recipe-card [recipe]="r"/>
+}

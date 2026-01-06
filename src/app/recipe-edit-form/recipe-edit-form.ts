@@ -35,6 +35,7 @@ export class RecipeEditForm implements OnInit {
 
   recipeForm!: RecipeForm;
   recipe = model.required<Recipe>();
+  beingEdited = model.required<boolean>();
 
   constructor(private fb: NonNullableFormBuilder) {}
 
@@ -144,5 +145,6 @@ export class RecipeEditForm implements OnInit {
         ))
       }))
     });
+    this.beingEdited.set(false);
   }
 }

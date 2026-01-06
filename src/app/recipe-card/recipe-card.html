@@ -28,3 +28,7 @@
     </li>
   }
 </ul>
+
+<button (click)="editRecipe()">Edit Recipe</button>
+
+<app-recipe-edit-form [(recipe)]="recipe" [(beingEdited)]="beingEdited"/>
