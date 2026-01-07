@@ -1,16 +1,28 @@
 :host {
+  // general
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: flex-start;
-
-  border: 1px solid black;
+  gap: 0.5rem;
+  padding: 0.5rem;
   width: 100%;
+  border: 1px solid black;
 
+  // general for all children
   * {
     margin: 0px;
+    width: 100%;
   }
 
+  > h4 {
+    text-align: center;
+  }
+  > button {
+    width: 100%;
+  }
+
+  // edit popup
   app-recipe-edit-form {
     position: fixed;
     top: 50%;
@@ -18,8 +30,6 @@
     transform: translate(-50%, -50%);
 
     width: 60vw;
-    background-color: white;
-    border: 1px solid black;
     max-height: 85vh;
   }
 }

@@ -1,6 +1,8 @@
 <h3 class="name">{{recipe().name}}</h3>
 <p class="rating">Rating: {{recipe().rating}}/5</p>
 
+<hr>
+
 <h4 class="ingredients-heading">Ingredients</h4>
 <ul class="ingredients">
   @for (s of recipe().sections; track $index) {
@@ -15,6 +17,8 @@
   }
 </ul>
 
+<hr>
+
 <h4 class="directions-heading">Directions</h4>
 <ul class="directions">
   @for (s of recipe().sections; track $index) {
@@ -28,6 +32,8 @@
     </li>
   }
 </ul>
+
+<hr>
 
 <button (click)="editRecipe()">Edit Recipe</button>
 
