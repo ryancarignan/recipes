@@ -1,107 +1,344 @@
-:host {
-  margin: 0px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  overflow-y: auto;
-  margin: 1rem;
+// :host {
+//   margin: 0px;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: space-between;
+//   overflow-y: auto;
+//   margin: 1rem;
 
+//   .heading {
+//     position: sticky;
+//     top: 0%;
+//     left: 50%;
+//     width: 100%;
+//     background-color: white;
+//     border-block-end: 1px solid black;
+//     height: 2rem;
+//     margin: 0px;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     .close {
+//       position: absolute;
+//       top: 0.25rem;
+//       left: 0.25rem;
+//     }
+//   }
+
+//   .ingredients,
+//   .directions {
+//     width: 100%;
+//   }
+
+//   .add,
+//   .remove,
+//   .submit,
+//   input {
+//     width: 100%;
+//   }
+// }
+// .recipe {
+//   display: flex;
+//   justify-content: space-evenly;
+//   align-items: flex-start;
+//   flex-direction: column;
+//   gap: 0.5rem;
+//   width: 85%;
+
+//   // vertical line between sections
+//   .section::after {
+//     content: '';
+//     border: 1px solid black;
+//     width: 100%;
+//     margin-block-end: 0.5rem;
+//     padding-inline: 0.25rem;
+//   }
+//   .section:first-of-type::before {
+//     content: '';
+//     border: 1px solid black;
+//     width: 100%;
+//     margin-block-start: 0.5%;
+//     padding-inline: 0.25rem;
+//   }
+//   .field {
+//     width: 100%;
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: flex-start;
+//     gap: 0.5rem;
+//     align-items: baseline;
+//   }
+//   > .field {
+//     padding: 0.25rem;
+//   }
+//   > button {
+//     padding: 0.25rem;
+//   }
+//   align-items: center;
+
+//   .sections {
+//     width: 100%;
+//   }
+//   .section {
+//     display: flex;
+//     justify-content: space-evenly;
+//     align-items: center;
+//     flex-direction: column;
+//     gap: 0.5rem;
+//     width: 100%;
+//     > * {
+//       padding: 0.25rem;
+//     }
+
+//     h4 {
+//       width: 100%;
+//       text-align: center;
+//       margin: 0px;
+//     }
+
+//     .ingredients {
+//       border: 1px solid black;
+//       display: flex;
+//       justify-content: space-evenly;
+//       align-items: flex-start;
+//       flex-direction: column;
+//       gap: 0.5rem;
+
+//       .ingredient {
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         gap: 0.5rem;
+//         width: 100%;
+//         flex: 1 1 0;
+//         min-width: 0;
+//         box-sizing: border-box;
+//         > * {
+//           min-width: 0;
+//           box-sizing: border-box;
+//         }
+//         input {
+//           width: 100%;
+//           box-sizing: border-box;
+//         }
+//         button {
+//           flex: 0;
+//           flex-basis: 3rem;
+//           background-color: green;
+//         }
+
+//         .field {
+//           display: flex;
+//           justify-content: center;
+//           align-items: center;
+//           flex-direction: column;
+//           gap: 0.125rem;
+//         }
+//       }
+//     }
+
+//     .directions {
+//       border: 1px solid black;
+//       display: flex;
+//       justify-content: space-evenly;
+//       align-items: flex-start;
+//       flex-direction: column;
+//       gap: 0.5rem;
+
+//       .direction {
+//         display: flex;
+//         justify-content: space-evenly;
+//         align-items: center;
+//         gap: 0.5rem;
+//         width: 100%;
+//         flex: 1 1 0;
+//         min-width: 0;
+//         box-sizing: border-box;
+//         textarea {
+//           resize: vertical;
+//           box-sizing: border-box;
+//         } 
+//         button {
+//           background-color: red;
+//           flex: 0;
+//           flex-basis: 3rem;
+//         }
+//       }
+//     }
+//   }
+// }
+
+// /* Ensure ingredient and direction children share width equally */
+// .recipe .ingredient > *,
+// .recipe .direction > * {
+//   flex: 1 1 0;
+//   min-width: 0;
+//   box-sizing: border-box;
+// }
+
+// /* Make form controls fill their flex item */
+// .recipe .ingredient input,
+// .recipe .ingredient select,
+// .recipe .direction textarea,
+// .recipe .direction input {
+//   width: 100%;
+//   box-sizing: border-box;
+// }
+
+// /* Replace the invalid rule `width: border-box` with box-sizing */
+// .recipe .direction textarea {
+//   resize: vertical;
+// }
+
+// /* Optional: use flex-start so children pack and fill rather than space-out */
+// .recipe .ingredient,
+// .recipe .direction {
+//   justify-content: flex-start;
+// }
+
+:host {
+  // sticky heading
   .heading {
     position: sticky;
     top: 0%;
-    left: 50%;
+    left: 0%;
     width: 100%;
-    background-color: white;
-    border-block-end: 1px solid black;
-    height: 2rem;
-    margin: 0px;
+    height: 3rem;
+    z-index: 100;
+
     display: flex;
     justify-content: center;
-    align-items: center;
-    .close {
+
+    border-block-end: 1px solid black;
+    background-color: white;
+    button {
       position: absolute;
       top: 0.25rem;
       left: 0.25rem;
     }
   }
 
-  .ingredients,
-  .directions {
-    width: 100%;
-  }
-
-  .add,
-  .remove,
-  .submit {
-    width: 100%;
-  }
-}
-.recipe {
+  // general
   display: flex;
-  justify-content: space-evenly;
-  align-items: flex-start;
   flex-direction: column;
-  gap: 0.5rem;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-y: auto;
+  max-height: 100%;
+  min-height: 7.5rem;
+  width: 100%;
 
-  .section::after {
-    content: '';
-    border: 1px solid black;
-    width: 100%;
-    margin-block-end: 0.5rem;
-  }
-  .section:first-of-type::before {
-    content: '';
-    border: 1px solid black;
-    width: 100%;
-    margin-block-start: 0.5%;
-  }
-  .section {
+  .recipe {
+    // general 
     display: flex;
-    justify-content: space-evenly;
-    align-items: flex-start;
     flex-direction: column;
-    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    width: 85%;
+    padding-block: 1rem;
+    gap: 1rem;
 
-    .ingredients {
-      border: 1px solid black;
+    // general for all children
+    * {
+      margin: 0px;
+    }
+    // general for immediate children
+    > * {
+      width: 100%;
+    }
+
+    // max-width buttons
+    .add,
+    .section > .remove {
+      width: 100%;
+    }
+
+    // directions and non-ingredient fields
+    .direction,
+    .field:not(.instruction .field) {
+      width: 100%;
       display: flex;
-      justify-content: space-evenly;
-      align-items: flex-start;
-      flex-direction: column;
+      align-items: baseline;
       gap: 0.5rem;
+      flex: 1 1 0;
 
-      .ingredient {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 0.5rem;
-
-        .field {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: column;
-          gap: 0.5rem;
-        }
+      input {
+        flex: 1;
+      }
+      textarea {
+        flex: 1;
+        resize: vertical;
       }
     }
 
-    .directions {
-      border: 1px solid black;
-      display: flex;
-      justify-content: space-evenly;
-      align-items: flex-start;
-      flex-direction: column;
-      gap: 0.5rem;
+    .sections {
+      // separating line
+      .section:first-of-type::before,
+      .section::after {
+        content: '';
+        display: inline-block;
+        border: 0.5px solid black;
+        width: 100%;
+        height: 0%;
+      }
+      .section:first-of-type::before {
+        margin-block-end: 0.5rem;
+      }
+      .section::after {
+        margin-block-start: 0.5rem;
+      }
+      .section:not(:last-of-type)::after {
+        margin-block-end: 1rem;
+      }
 
-      .direction {
+      // individual sections
+      .section {
         display: flex;
-        justify-content: space-evenly;
-        align-items: center;
+        flex-direction: column;
+        text-align: center;
         gap: 0.5rem;
-        textarea {
-          min-width: 35rem;
+
+        // directions and ingredients groupings
+        .directions,
+        .ingredients {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .ingredient {
+          display: flex;
+          width: 100%;
+          gap: 0.5rem;
+          flex: 1 1 0;
+          align-items: stretch;
+          
+          button {
+            height: 50%;
+          }
+
+          .field {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            label {
+              text-align: center;
+            }
+            input {
+              box-sizing: border-box;
+              width: 100%;
+            }
+          }
+          .field:nth-of-type(1) { // quantity
+            flex: 1;
+          }
+          .field:nth-of-type(2) { // unit
+            flex: 2;
+          }
+          .field:nth-of-type(3) { // name
+            flex: 6;
+          }
         }
       }
     }
