@@ -36,7 +36,8 @@ export class RecipeEditForm implements OnInit {
   recipeForm!: RecipeForm;
   recipe = model.required<Recipe>();
   beingEdited = model.required<boolean>();
-  newImage!: string;
+  // string if uploaded, null if not, undefined if deleted
+  newImage!: string | null | undefined;
 
   constructor(private fb: NonNullableFormBuilder) {}
 
@@ -46,7 +47,7 @@ export class RecipeEditForm implements OnInit {
       rating: [this.recipe().rating],
       sections: this.fb.array(this.recipe().sections.map((s) => this.generateSection(s)))
     });
-    this.newImage = '';
+    this.newImage = null;
   }
 
   /*
@@ -155,13 +156,17 @@ export class RecipeEditForm implements OnInit {
     }
   }
 
+  removeImage() {
+    this.newImage = undefined;
+  }
+
   // converts RecipeForm to Recipe and saves the state of this.recipeForm in this.recipe
   onSubmit() {
     console.log('Form submitted: ', this.recipeForm.getRawValue());
     this.recipe.set({
       name: this.recipeForm.controls.name.value,
       rating: this.recipeForm.controls.rating.value,
-      image: (this.newImage.length > 0) ? this.newImage : this.recipe().image,
+      image: (this.newImage !== null) ? this.newImage : this.recipe().image,
       sections: this.recipeForm.controls.sections.controls.map((s) => ({
         name: s.controls.name.value,
         ingredients: s.controls.ingredients.controls.map((i) => ({

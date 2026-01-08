@@ -4,7 +4,6 @@
     <h3>Edit Recipe:</h3>
   </div>
 
-
   <form class="recipe" [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
 
     <div class="field name">
@@ -20,6 +19,7 @@
     <div class="field image">
       <label for="image">Image: </label>
       <input type="file" (change)="onFileChange($event)">
+      <button type="button" (click)="removeImage()">Remove Image</button>
     </div>
 
     <div class="sections" formArrayName="sections">
