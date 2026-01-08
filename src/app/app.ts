@@ -1,12 +1,13 @@
 import { Component, Signal, signal, WritableSignal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Recipe, Section, Ingredient, emptyRecipe } from './models/recipe';
+import { Recipe, Section, Ingredient, emptyRecipe, testRecipes } from './models/recipe';
 import { RecipeCard } from './recipe-card/recipe-card';
 import { RecipeEditForm } from './recipe-edit-form/recipe-edit-form';
+import { RecipeThumbnail } from './recipe-thumbnail/recipe-thumbnail';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RecipeCard, RecipeEditForm],
+  imports: [RouterOutlet, RecipeCard, RecipeEditForm, RecipeThumbnail],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -66,6 +67,6 @@ export class App {
   recipes!: Recipe[];
 
   ngOnInit() {
-    this.recipes = [this.testRecipe, this.testEmptyRecipe];
+    this.recipes = testRecipes;
   }
 }
