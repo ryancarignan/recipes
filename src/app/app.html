@@ -1,10 +1,12 @@
 <router-outlet />
-<h2>Recipes</h2>
-<div class="recipes">
-  @for (r of recipes; track $index) {
-    <app-recipe-thumbnail [recipe]="r"/>
-  }
-</div>
 
-<h2>Test Recipe Card</h2>
-<app-recipe-card [(recipe)]="testRecipe"/>
+@if (!recipeIsOpened) {
+  <h2>Recipes</h2>
+  <div class="recipes">
+    @for (r of recipes; track $index) {
+      <app-recipe-thumbnail class="clickable" [recipe]="r" (click)="onClick(r)"/>
+    }
+  </div>
+} @else {
+  <app-recipe-card [(recipeIsOpened)]="recipeIsOpened" [(recipe)]="openedRecipe"/>
+}

@@ -22,12 +22,36 @@
     width: 100%;
   }
 
+  .heading {
+    position: relative;
+    height: 1.5rem;
+    > * {
+      position: absolute;
+      width: fit-content;
+    }
+    button {
+      top: 0%;
+      left: 0%;
+    }
+    .name {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .rating {
+      top: 50%;
+      right: 0%;
+      transform: translate(0%, -45%);
+    }
+  }
+
   // edit popup
   app-recipe-edit-form {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 100;
 
     width: 60vw;
     max-height: 85vh;
@@ -42,4 +66,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+button, 
+.clickable {
+  cursor: pointer;
 }

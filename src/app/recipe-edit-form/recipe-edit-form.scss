@@ -147,3 +147,9 @@
     }
   }
 }
+
+button,
+.clickable,
+::file-selector-button {
+  cursor: pointer;
+}

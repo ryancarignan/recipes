@@ -10,6 +10,7 @@ import { RecipeEditForm } from '../recipe-edit-form/recipe-edit-form';
 })
 export class RecipeCard implements OnInit {
   recipe = model<Recipe>(emptyRecipe);
+  recipeIsOpened = model<boolean>(false);
   beingEdited!: boolean;
   imageError!: boolean;
 
@@ -28,5 +29,10 @@ export class RecipeCard implements OnInit {
 
   onImageLoad() {
     this.imageError = false;
+  }
+
+  close() {
+    this.beingEdited = false;
+    this.recipeIsOpened.set(false);
   }
 }

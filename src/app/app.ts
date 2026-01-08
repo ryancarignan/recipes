@@ -65,8 +65,17 @@ export class App {
     ]
   }
   recipes!: Recipe[];
+  openedRecipe!: Recipe;
+  recipeIsOpened!: boolean
 
   ngOnInit() {
     this.recipes = testRecipes;
+    this.openedRecipe = emptyRecipe;
+    this.recipeIsOpened = false;
+  }
+
+  onClick(recipe: Recipe) {
+    this.recipeIsOpened = true;
+    this.openedRecipe = recipe;
   }
 }
