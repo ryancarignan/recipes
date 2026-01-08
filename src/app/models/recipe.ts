@@ -27,7 +27,7 @@ export const testRecipes: Recipe[] = [
   {
     name: "Classic Pancakes",
     rating: 4.5,
-    image: "https://example.com/pancakes.jpg",
+    image: "pancakes-image.webp",
     sections: [
       {
         name: "Batter",
@@ -60,7 +60,7 @@ export const testRecipes: Recipe[] = [
   {
     name: "Spaghetti Bolognese",
     rating: 4.8,
-    image: "https://example.com/spaghetti.jpg",
+    image: "spaghetti-image.jpg",
     sections: [
       {
         name: "Sauce",
@@ -125,7 +125,7 @@ export const testRecipes: Recipe[] = [
   {
     name: "Chicken Stir Fry",
     rating: 4.6,
-    image: "https://example.com/stirfry.jpg",
+    image: "chicken-stir-fry-image.jpg",
     sections: [
       {
         name: "Stir Fry",
