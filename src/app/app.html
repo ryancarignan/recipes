@@ -1,3 +1,10 @@
 <router-outlet />
 <h2>Recipes</h2>
-<app-recipe-card [recipe]="testRecipe"/>
+<div class="recipes">
+  @for (r of recipes; track $index) {
+    <app-recipe-thumbnail [recipe]="r"/>
+  }
+</div>
+
+<h2>Test Recipe Card</h2>
+<app-recipe-card [(recipe)]="testRecipe"/>

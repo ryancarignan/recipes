@@ -1,0 +1,51 @@
+:host {
+  // general
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 1px solid black;
+  display: inline-block;
+  margin: 0px;
+  padding: 0px;
+  position: relative; // for heading positioning
+
+  * {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  // floats on top of image
+  .heading {
+    // color
+    color: black;
+    background-color: color-mix(in srgb, white, rgba(0, 0, 0, 0) 35%);
+
+    // position
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+
+    // size
+    width: 100%;
+    height: 5rem;
+
+    // centering
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  // image
+  img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+  }
+
+  // base color if no image
+  background-color: lightgrey;
+}

@@ -1,0 +1,10 @@
+<div class="heading">
+  <h3>{{recipe().name}}</h3>
+  <h4>Rating: {{recipe().rating}}</h4>
+</div>
+@if (recipe().image !== undefined) {
+  <img [src]="recipe().image" alt="" [title]="recipe().name" (load)="onImageLoad()" (error)="onImageError()">
+  @if (imageError) {
+    <div title="error loading &quot;{{recipe().image}}&quot;" class="image-error">error loading image</div>
+  }
+}

@@ -7,4 +7,16 @@
   app-recipe-card {
     width: 45%;
   }
+
+  .recipes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  app-recipe-thumbnail {
+    width: 45%;
+  }
 }
