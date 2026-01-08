@@ -16,6 +16,7 @@ export class App {
   testRecipe: Recipe = {
     name: "Apple Pie",
     rating: 4.2,
+    image: "apple-pie-image.jpg",
     sections: [
       {
         name: "Crust",

@@ -36,6 +36,7 @@ export class RecipeEditForm implements OnInit {
   recipeForm!: RecipeForm;
   recipe = model.required<Recipe>();
   beingEdited = model.required<boolean>();
+  newImage!: string;
 
   constructor(private fb: NonNullableFormBuilder) {}
 
@@ -45,6 +46,7 @@ export class RecipeEditForm implements OnInit {
       rating: [this.recipe().rating],
       sections: this.fb.array(this.recipe().sections.map((s) => this.generateSection(s)))
     });
+    this.newImage = '';
   }
 
   /*
@@ -127,12 +129,39 @@ export class RecipeEditForm implements OnInit {
     this.recipeForm.controls.sections.at(sIndex)?.controls?.directions.removeAt(dIndex);
   }
 
+  // Source - https://stackoverflow.com/a
+  // Posted by Sourav Golui, modified by community. See post 'Timeline' for change history
+  // Retrieved 2026-01-07, License - CC BY-SA 4.0
+  onFileChange(event: Event) {
+    const eventTarget = event.target as HTMLInputElement;
+    if (!eventTarget)
+      return;
+    const files = eventTarget.files as FileList;
+    if (!files || files.length === 0)
+      return;
+
+    const mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      console.log("Unsupported filetype uploaded.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(files[0]); 
+    reader.onload = (_event) => { 
+      const aNewImage = reader.result; 
+      if (typeof aNewImage === 'string')
+        this.newImage = aNewImage;
+    }
+  }
+
   // converts RecipeForm to Recipe and saves the state of this.recipeForm in this.recipe
   onSubmit() {
     console.log('Form submitted: ', this.recipeForm.getRawValue());
     this.recipe.set({
       name: this.recipeForm.controls.name.value,
       rating: this.recipeForm.controls.rating.value,
+      image: (this.newImage.length > 0) ? this.newImage : this.recipe().image,
       sections: this.recipeForm.controls.sections.controls.map((s) => ({
         name: s.controls.name.value,
         ingredients: s.controls.ingredients.controls.map((i) => ({

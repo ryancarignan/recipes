@@ -17,6 +17,11 @@
       <input type="number" formControlName="rating">
     </div>
 
+    <div class="field image">
+      <label for="image">Image: </label>
+      <input type="file" (change)="onFileChange($event)">
+    </div>
+
     <div class="sections" formArrayName="sections">
       @for (s of recipeForm.controls.sections.controls; let sIndex = $index; track sIndex) {
         <div class="section" [formGroupName]="sIndex">

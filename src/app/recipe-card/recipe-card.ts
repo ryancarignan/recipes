@@ -1,4 +1,4 @@
-import { Component, input, model } from '@angular/core';
+import { Component, input, model, OnInit } from '@angular/core';
 import { emptyRecipe, Recipe } from '../models/recipe';
 import { RecipeEditForm } from '../recipe-edit-form/recipe-edit-form';
 
@@ -8,11 +8,25 @@ import { RecipeEditForm } from '../recipe-edit-form/recipe-edit-form';
   templateUrl: './recipe-card.html',
   styleUrl: './recipe-card.scss',
 })
-export class RecipeCard {
+export class RecipeCard implements OnInit {
   recipe = model<Recipe>(emptyRecipe);
-  beingEdited = false;
+  beingEdited!: boolean;
+  imageError!: boolean;
+
+  ngOnInit() {
+    this.beingEdited = false;
+    this.imageError = false;
+  }
 
   editRecipe() {
     this.beingEdited = true;
+  }
+
+  onImageError() {
+    this.imageError = true;
+  }
+
+  onImageLoad() {
+    this.imageError = false;
   }
 }

@@ -1,6 +1,7 @@
 export interface Recipe {
   name: string;
   rating: number;
+  image?: string;
   sections: Section[];
 }
 

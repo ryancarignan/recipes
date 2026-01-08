@@ -33,3 +33,13 @@
     max-height: 85vh;
   }
 }
+
+// placeholder for image that didn't load
+.image-error {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: lightgrey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

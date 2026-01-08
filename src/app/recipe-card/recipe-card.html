@@ -3,6 +3,14 @@
 
 <hr>
 
+@if (recipe().image !== undefined) {
+  <img [src]="recipe().image" [alt]="recipe().name" (load)="onImageLoad()" (error)="onImageError()">
+  @if (imageError) {
+    <div class="image-error">error loading image</div>
+  }
+  <hr>
+}
+
 <h4 class="ingredients-heading">Ingredients</h4>
 <ul class="ingredients">
   @for (s of recipe().sections; track $index) {
