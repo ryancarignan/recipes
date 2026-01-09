@@ -161,7 +161,7 @@ export class RecipeEditForm implements OnInit {
     this.newImage = undefined;
   }
 
-  // converts RecipeForm to Recipe and saves the state of this.recipeForm in this.recipe
+  // converts RecipeForm to Recipe and emits an event which updates recipes in app.html (or whatever passed it update)
   onSubmit() {
     console.log('Form submitted: ', this.recipeForm.getRawValue());
     this.update.emit({

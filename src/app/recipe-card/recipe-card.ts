@@ -34,6 +34,7 @@ export class RecipeCard implements OnInit {
     this.imageError = false;
   }
 
+  // passes the signal back to the parent, from recipe-edit-form
   forwardUpdate(updatedRecipe: Recipe) {
     this.update.emit(updatedRecipe);
   }
