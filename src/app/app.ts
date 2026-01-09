@@ -15,11 +15,13 @@ export class App {
   recipes = signal<Recipe[]>(testRecipes);
   openedRecipe!: Recipe;
   recipeIsOpened!: boolean
+  idCounter!: number; // NOTE only used for local ids, can be removed when backend sets ids
 
   ngOnInit() {
     this.recipes.set(testRecipes);
     this.openedRecipe = emptyRecipe;
     this.recipeIsOpened = false;
+    this.idCounter = this.recipes().length + 1;
   }
 
   onClick(recipe: Recipe) {
@@ -27,17 +29,25 @@ export class App {
     this.openedRecipe = recipe;
   }
 
-  updateRecipe(newRecipe: Recipe) {
-    this.recipes.update(arr =>
-      arr.map(r => r.id === newRecipe.id ? newRecipe : r)
-    );
-    // reset openedRecipe to updated value
-    this.openedRecipe = this.recipes().find(r => r.id === newRecipe.id)!;
+  updateRecipe(newRecipe: Recipe | null) {
+    if (newRecipe === null) {
+      this.recipes.update(arr => 
+        arr.filter(r => r !== this.openedRecipe)
+      );
+      // close recipe card
+      this.recipeIsOpened = false;
+    } else {
+      this.recipes.update(arr =>
+        arr.map(r => (r.id === newRecipe.id) ? newRecipe : r)
+      );
+      // reset openedRecipe to updated value
+      this.openedRecipe = this.recipes().find(r => r.id === newRecipe.id)!;
+    }
   }
 
   addNewRecipe() {
     const newRecipe = structuredClone(emptyRecipe);
-    newRecipe.id = this.recipes().length + 1; // NOTE should be handled by backend when that is added
+    newRecipe.id = this.idCounter++; // NOTE should be handled by backend when that is added
     this.recipes.update(recipes => [...recipes, newRecipe]);
     this.openedRecipe = newRecipe;
     this.recipeIsOpened = true;

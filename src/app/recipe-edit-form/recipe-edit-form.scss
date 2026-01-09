@@ -57,6 +57,13 @@
       width: 100%;
     }
 
+    .delete-recipe {
+      color: red;
+    }
+    .submit {
+      color: green;
+    }
+
     // directions and non-ingredient fields
     .direction,
     .field:not(.instruction .field) {

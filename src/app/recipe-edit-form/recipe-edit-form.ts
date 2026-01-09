@@ -38,7 +38,7 @@ export class RecipeEditForm implements OnInit {
   beingEdited = model.required<boolean>();
   // string if uploaded, null if not, undefined if deleted
   newImage!: string | null | undefined;
-  update = output<Recipe>();
+  update = output<Recipe | null>();
 
   constructor(private fb: NonNullableFormBuilder) {}
 
@@ -182,6 +182,13 @@ export class RecipeEditForm implements OnInit {
       }))
     });
     this.beingEdited.set(false);
+  }
+
+  deleteRecipe() {
+    if (confirm('Are you sure you want to permanently delete this recipe?')) {
+      this.update.emit(null);
+      this.beingEdited.set(false); // close popup
+    }
   }
 
   close() {

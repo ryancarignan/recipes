@@ -13,7 +13,7 @@ export class RecipeCard implements OnInit {
   recipeIsOpened = model<boolean>(false);
   beingEdited!: boolean;
   imageError!: boolean;
-  update = output<Recipe>();
+  update = output<Recipe | null>();
 
   ngOnInit() {
     // open editing form immediately if empty (probably new)
@@ -39,7 +39,9 @@ export class RecipeCard implements OnInit {
   }
 
   // passes the signal back to the parent, from recipe-edit-form
-  forwardUpdate(updatedRecipe: Recipe) {
+  forwardUpdate(updatedRecipe: Recipe | null) {
+    if (updatedRecipe === null) // close card if deleted
+      this.recipeIsOpened.set(false);
     this.update.emit(updatedRecipe);
   }
 
