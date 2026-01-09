@@ -2,7 +2,6 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Recipe, Section, Ingredient, emptyRecipe, testRecipes } from './models/recipe';
 import { RecipeCard } from './recipe-card/recipe-card';
-import { RecipeEditForm } from './recipe-edit-form/recipe-edit-form';
 import { RecipeThumbnail } from './recipe-thumbnail/recipe-thumbnail';
 
 @Component({

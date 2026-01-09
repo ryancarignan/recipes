@@ -18,6 +18,39 @@ export interface Ingredient {
   quantity: number;
 }
 
+/**
+ * Performs a deep equality check on a pair of Recipes
+ * @param r1 a Recipe to compare
+ * @param r2 a Recipe to compare
+ * @param compareIds if the ids should be considered in the comparison
+ * @returns if the Recipes are equal
+ */
+export function compareRecipes(r1: Recipe, r2: Recipe, compareIds: boolean): boolean {
+  return (
+    (!compareIds || r1.id === r2.id) && // id
+    r1.name === r2.name &&
+    r1.image === r2.image &&
+    r1.rating === r2.rating &&
+    r1.sections.length === r2.sections.length &&
+    r1.sections.map((s1, i) => { // sections
+      const s2 = r2.sections[i];
+      return s1.name === s2.name && // name
+      s1.ingredients.map((i1, i) => { // ingredients
+        const i2 = s2.ingredients[i];
+        return (
+          i1.name === i2.name &&
+          i1.quantity === i2.quantity &&
+          i1.unit === i2.unit
+        );
+      }).every(Boolean) &&
+      s1.directions.map((d1, i) => { // directions
+        const d2 = s2.directions[i];
+        return (d1 === d2);
+      }).every(Boolean);
+    }).every(Boolean)
+  );
+}
+
 export const emptyRecipe: Recipe = {
   id: -1, // TODO should be set when created
   name: "",

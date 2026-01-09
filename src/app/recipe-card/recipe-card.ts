@@ -1,5 +1,5 @@
 import { Component, input, output, model, OnInit } from '@angular/core';
-import { emptyRecipe, Recipe } from '../models/recipe';
+import { emptyRecipe, Recipe, compareRecipes } from '../models/recipe';
 import { RecipeEditForm } from '../recipe-edit-form/recipe-edit-form';
 
 @Component({
@@ -16,7 +16,11 @@ export class RecipeCard implements OnInit {
   update = output<Recipe>();
 
   ngOnInit() {
-    this.beingEdited = false;
+    // open editing form immediately if empty (probably new)
+    if (compareRecipes(this.recipe(), emptyRecipe, false))
+      this.beingEdited = true;
+    else 
+      this.beingEdited = false;
     this.imageError = false;
   }
 
