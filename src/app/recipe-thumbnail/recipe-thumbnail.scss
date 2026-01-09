@@ -8,6 +8,7 @@
   padding: 0px;
   position: relative; // for heading positioning
   overflow: hidden;
+  transition: background-color 0.2s ease;
 
   * {
     margin: 0px;
@@ -59,4 +60,7 @@
 }
 :host:hover > img {
   transform: scale(1.05);
+}
+:host:hover {
+  background-color: color-mix(in srgb, lightgrey, white 30%)
 }

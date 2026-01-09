@@ -16,8 +16,20 @@
     gap: 1rem;
   }
 
-  app-recipe-thumbnail {
+  app-recipe-thumbnail,
+  .add {
     width: 45%;
+  }
+  .add {
+    aspect-ratio: 1 / 1;
+    font-size: 5rem;
+    font-weight: 100;
+    background-color: lightgrey;
+    border: 1px solid black;
+    transition: background-color 0.2s ease;
+  }
+  .add:hover {
+    background-color: color-mix(in srgb, lightgrey, white 30%);
   }
 
   button, 

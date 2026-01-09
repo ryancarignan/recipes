@@ -3,9 +3,10 @@
 @if (!recipeIsOpened) {
   <h2>Recipes</h2>
   <div class="recipes">
-    @for (r of recipes(); track r.id) {
+    @for (r of recipes(); track $index) {
       <app-recipe-thumbnail class="clickable" [recipe]="r" (click)="onClick(r)"/>
     }
+    <button class="add" type="button" (click)="addNewRecipe()">+</button>
   </div>
 } @else {
   <app-recipe-card [(recipeIsOpened)]="recipeIsOpened" [recipe]="openedRecipe" (update)="updateRecipe($event)"/> <!-- TODO may need to do recipes[i] = $event instead of openedRecipe = $event, not sure yet -->

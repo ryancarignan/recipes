@@ -13,7 +13,6 @@ import { RecipeThumbnail } from './recipe-thumbnail/recipe-thumbnail';
 })
 export class App {
   protected readonly title = signal('recipes');
-  testEmptyRecipe = emptyRecipe;
   recipes = signal<Recipe[]>(testRecipes);
   openedRecipe!: Recipe;
   recipeIsOpened!: boolean
@@ -35,5 +34,13 @@ export class App {
     );
     // reset openedRecipe to updated value
     this.openedRecipe = this.recipes().find(r => r.id === newRecipe.id)!;
+  }
+
+  addNewRecipe() {
+    const newRecipe = structuredClone(emptyRecipe);
+    newRecipe.id = this.recipes().length + 1; // NOTE should be handled by backend when that is added
+    this.recipes.update(recipes => [...recipes, newRecipe]);
+    this.openedRecipe = newRecipe;
+    this.recipeIsOpened = true;
   }
 }
