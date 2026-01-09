@@ -33,7 +33,7 @@
 
           <div class="ingredients" formArrayName="ingredients">
             <h4>Ingredients:</h4>
-            @for (i of recipeForm.controls.sections.at(sIndex)?.controls?.ingredients?.controls; let iIndex = $index; track iIndex) {
+            @for (i of recipeForm.controls.sections.at(sIndex).controls.ingredients.controls; let iIndex = $index; track iIndex) {
               <div class="ingredient" [formGroupName]="iIndex">
                 <div class="field quantity">
                   <label for="quantity">Quantity: </label>
@@ -57,7 +57,7 @@
 
           <div class="directions" formArrayName="directions">
             <h4>Directions:</h4>
-            @for (d of recipeForm.controls.sections.at(sIndex)?.controls?.directions?.controls; let dIndex = $index; track dIndex) {
+            @for (d of recipeForm.controls.sections.at(sIndex).controls.directions.controls; let dIndex = $index; track dIndex) {
               <div class="direction" [formGroupName]="dIndex">
                 <div class="field text">
                   <label for="direction">{{dIndex + 1}}. </label>

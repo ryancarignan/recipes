@@ -1,4 +1,4 @@
-import { Component, EventEmitter, input, model, OnInit, Output } from '@angular/core';
+import { Component, input, output, model, OnInit } from '@angular/core';
 import { emptyRecipe, Recipe } from '../models/recipe';
 import { RecipeEditForm } from '../recipe-edit-form/recipe-edit-form';
 
@@ -13,7 +13,7 @@ export class RecipeCard implements OnInit {
   recipeIsOpened = model<boolean>(false);
   beingEdited!: boolean;
   imageError!: boolean;
-  @Output() update = new EventEmitter<Recipe>();
+  update = output<Recipe>();
 
   ngOnInit() {
     this.beingEdited = false;

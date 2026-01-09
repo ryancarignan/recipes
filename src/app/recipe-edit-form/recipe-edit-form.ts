@@ -1,6 +1,6 @@
-import { Component, EventEmitter, InputSignal, ModelSignal, OnInit, input, model, Output } from '@angular/core';
-import { Recipe, Section, Ingredient, emptyRecipe } from '../models/recipe'
-import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, NonNullableFormBuilder } from '@angular/forms'
+import { Component, OnInit, input, output, model } from '@angular/core';
+import { Recipe, Section, Ingredient } from '../models/recipe'
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, NonNullableFormBuilder } from '@angular/forms'
 
 type IngredientForm = FormGroup<{
   name: FormControl<string>;
@@ -38,7 +38,7 @@ export class RecipeEditForm implements OnInit {
   beingEdited = model.required<boolean>();
   // string if uploaded, null if not, undefined if deleted
   newImage!: string | null | undefined;
-  @Output() update = new EventEmitter<Recipe>();
+  update = output<Recipe>();
 
   constructor(private fb: NonNullableFormBuilder) {}
 
