@@ -1,4 +1,4 @@
-import { Component, input, model, OnInit } from '@angular/core';
+import { Component, EventEmitter, input, model, OnInit, Output } from '@angular/core';
 import { emptyRecipe, Recipe } from '../models/recipe';
 import { RecipeEditForm } from '../recipe-edit-form/recipe-edit-form';
 
@@ -9,10 +9,11 @@ import { RecipeEditForm } from '../recipe-edit-form/recipe-edit-form';
   styleUrl: './recipe-card.scss',
 })
 export class RecipeCard implements OnInit {
-  recipe = model<Recipe>(emptyRecipe);
+  recipe = input<Recipe>(emptyRecipe);
   recipeIsOpened = model<boolean>(false);
   beingEdited!: boolean;
   imageError!: boolean;
+  @Output() update = new EventEmitter<Recipe>();
 
   ngOnInit() {
     this.beingEdited = false;
@@ -20,7 +21,9 @@ export class RecipeCard implements OnInit {
   }
 
   editRecipe() {
+    console.log('hello, is this thing working? line 24 of recipe-card.ts');
     this.beingEdited = true;
+    console.log('Recipe being edited: ', this.recipe());
   }
 
   onImageError() {
@@ -29,6 +32,10 @@ export class RecipeCard implements OnInit {
 
   onImageLoad() {
     this.imageError = false;
+  }
+
+  forwardUpdate(updatedRecipe: Recipe) {
+    this.update.emit(updatedRecipe);
   }
 
   close() {

@@ -15,6 +15,7 @@ export class App {
   protected readonly title = signal('recipes');
   testEmptyRecipe = emptyRecipe;
   testRecipe: Recipe = {
+    id: 0,
     name: "Apple Pie",
     rating: 4.2,
     image: "apple-pie-image.jpg",
@@ -64,12 +65,12 @@ export class App {
       }
     ]
   }
-  recipes!: Recipe[];
+  recipes = signal<Recipe[]>(testRecipes);
   openedRecipe!: Recipe;
   recipeIsOpened!: boolean
 
   ngOnInit() {
-    this.recipes = testRecipes;
+    this.recipes.set(testRecipes);
     this.openedRecipe = emptyRecipe;
     this.recipeIsOpened = false;
   }
@@ -77,5 +78,13 @@ export class App {
   onClick(recipe: Recipe) {
     this.recipeIsOpened = true;
     this.openedRecipe = recipe;
+  }
+
+  updateRecipe(newRecipe: Recipe) {
+    this.recipes.update(arr =>
+      arr.map(r => r.id === newRecipe.id ? newRecipe : r)
+    );
+    // reset openedRecipe to updated value
+    this.openedRecipe = this.recipes().find(r => r.id === newRecipe.id)!;
   }
 }

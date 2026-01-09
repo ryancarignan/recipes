@@ -1,4 +1,5 @@
 export interface Recipe {
+  id: number;
   name: string;
   rating: number;
   image?: string;
@@ -18,6 +19,7 @@ export interface Ingredient {
 }
 
 export const emptyRecipe: Recipe = {
+  id: -1, // TODO should be set when created
   name: "",
   rating: 0,
   sections: []
@@ -25,6 +27,7 @@ export const emptyRecipe: Recipe = {
 
 export const testRecipes: Recipe[] = [
   {
+    id: 1,
     name: "Classic Pancakes",
     rating: 4.5,
     image: "pancakes-image.webp",
@@ -58,6 +61,7 @@ export const testRecipes: Recipe[] = [
     ]
   },
   {
+    id: 2,
     name: "Spaghetti Bolognese",
     rating: 4.8,
     image: "spaghetti-image.jpg",
@@ -91,6 +95,7 @@ export const testRecipes: Recipe[] = [
     ]
   },
   {
+    id: 3,
     name: "Caesar Salad",
     rating: 4.2,
     sections: [
@@ -123,6 +128,7 @@ export const testRecipes: Recipe[] = [
     ]
   },
   {
+    id: 4,
     name: "Chicken Stir Fry",
     rating: 4.6,
     image: "chicken-stir-fry-image.jpg",
@@ -144,6 +150,7 @@ export const testRecipes: Recipe[] = [
     ]
   },
   {
+    id: 5,
     name: "Chocolate Chip Cookies",
     rating: 4.9,
     sections: [

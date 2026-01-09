@@ -1,23 +1,23 @@
-@if (recipe !== null) {
+@if (recipe() !== null) {
   <div class="heading">
     <button type="button" (click)="close()">X</button>
-    <h3 class="name">{{recipe()!.name}}</h3>
-    <p class="rating">Rating: {{recipe()!.rating}}/5</p>
+    <h3 class="name">{{recipe().name}}</h3>
+    <p class="rating">Rating: {{recipe().rating}}/5</p>
   </div>
   
   <hr>
   
-  @if (recipe()!.image !== undefined) {
-    <img [src]="recipe()!.image" alt="" [title]="recipe()!.name" (load)="onImageLoad()" (error)="onImageError()">
+  @if (recipe().image !== undefined) {
+    <img [src]="recipe().image" alt="" [title]="recipe().name" (load)="onImageLoad()" (error)="onImageError()">
     @if (imageError) {
-      <div title="error loading &quot;{{recipe()!.image}}&quot;" class="image-error">error loading image</div>
+      <div title="error loading &quot;{{recipe().image}}&quot;" class="image-error">error loading image</div>
     }
     <hr>
   }
   
   <h4 class="ingredients-heading">Ingredients</h4>
   <ul class="ingredients">
-    @for (s of recipe()!.sections; track $index) {
+    @for (s of recipe().sections; track $index) {
       @if (s.ingredients.length > 0) {
         <li class="section">
           <h5 class="name">{{s.name}}</h5>
@@ -35,7 +35,7 @@
   
   <h4 class="directions-heading">Directions</h4>
   <ul class="directions">
-    @for (s of recipe()!.sections; track $index) {
+    @for (s of recipe().sections; track $index) {
       <li class="section">
         <h5 class="name">{{s.name}}</h5>
         <ol class="directions">
@@ -50,8 +50,8 @@
   <hr>
   
   <button (click)="editRecipe()">Edit Recipe</button>
-  
-  @if (beingEdited && recipe !== null) {
-    <app-recipe-edit-form [(recipe)]="recipe" [(beingEdited)]="beingEdited"/>
+ 
+  @if (beingEdited && recipe() !== null) {
+    <app-recipe-edit-form [recipe]="recipe()" (update)="forwardUpdate($event)" [(beingEdited)]="beingEdited"/>
   }
 }

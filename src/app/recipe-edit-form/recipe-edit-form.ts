@@ -1,4 +1,4 @@
-import { Component, InputSignal, ModelSignal, OnInit, input, model } from '@angular/core';
+import { Component, EventEmitter, InputSignal, ModelSignal, OnInit, input, model, Output } from '@angular/core';
 import { Recipe, Section, Ingredient, emptyRecipe } from '../models/recipe'
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, NonNullableFormBuilder } from '@angular/forms'
 
@@ -34,10 +34,11 @@ type RecipeForm = FormGroup<{
 export class RecipeEditForm implements OnInit {
 
   recipeForm!: RecipeForm;
-  recipe = model.required<Recipe>();
+  recipe = input.required<Recipe>();
   beingEdited = model.required<boolean>();
   // string if uploaded, null if not, undefined if deleted
   newImage!: string | null | undefined;
+  @Output() update = new EventEmitter<Recipe>();
 
   constructor(private fb: NonNullableFormBuilder) {}
 
@@ -163,7 +164,8 @@ export class RecipeEditForm implements OnInit {
   // converts RecipeForm to Recipe and saves the state of this.recipeForm in this.recipe
   onSubmit() {
     console.log('Form submitted: ', this.recipeForm.getRawValue());
-    this.recipe.set({
+    this.update.emit({
+      id: this.recipe().id,
       name: this.recipeForm.controls.name.value,
       rating: this.recipeForm.controls.rating.value,
       image: (this.newImage !== null) ? this.newImage : this.recipe().image,
