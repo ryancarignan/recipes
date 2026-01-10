@@ -1,6 +1,6 @@
 import { Component, OnInit, input, output, model } from '@angular/core';
 import { Recipe, Section, Ingredient } from '../models/recipe'
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, NonNullableFormBuilder } from '@angular/forms'
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, NonNullableFormBuilder, FormControlName, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms'
 
 type IngredientForm = FormGroup<{
   name: FormControl<string>;
@@ -45,10 +45,23 @@ export class RecipeEditForm implements OnInit {
   ngOnInit() {
     this.recipeForm = this.fb.group({
       name: [this.recipe().name, Validators.required],
-      rating: [this.recipe().rating],
-      sections: this.fb.array(this.recipe().sections.map((s) => this.generateSection(s)))
+      rating: [this.recipe().rating, [Validators.min(0), Validators.max(5)]],
+      sections: this.fb.array(this.recipe().sections.map((s) => this.generateSection(s)), Validators.required)
     });
     this.newImage = null;
+  }
+
+  // custom validator for strict greater than
+  greaterThan(min: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (value === null || value === undefined || value === '')
+        return null; // not present, can be caught by required
+      if (value > min)
+        return null;
+      else
+        return { greaterThan: { requiredValue: min, actualValue: value } };
+    }
   }
 
   /*
@@ -63,15 +76,15 @@ export class RecipeEditForm implements OnInit {
   generateSection(section?: Section): SectionForm {
     if (section !== undefined) {
       return this.fb.group({
-        name: section.name,
+        name: [section.name, Validators.required],
         ingredients: this.fb.array(section.ingredients.map((i) => this.generateIngredient(i))),
         directions: this.fb.array(section.directions.map((d) => this.generateDirection(d)))
       });
     } else {
       return this.fb.group({
-        name: [''],
+        name: ['', Validators.required],
         ingredients: this.fb.array<IngredientForm>([]),
-        directions: this.fb.array<DirectionForm>([]),
+        directions: this.fb.array<DirectionForm>([], Validators.required),
       });
     }
   }
@@ -90,13 +103,13 @@ export class RecipeEditForm implements OnInit {
       return this.fb.group({
         name: [ingredient.name, Validators.required],
         unit: [ingredient.unit],
-        quantity: [ingredient.quantity, Validators.required]
+        quantity: [ingredient.quantity, [Validators.required, this.greaterThan(0)]]
       });
     } else {
       return this.fb.group({
         name: ['', Validators.required],
         unit: [''],
-        quantity: [1, Validators.required]
+        quantity: [1, [Validators.required, this.greaterThan(0)]]
       });
     }
   }
@@ -161,9 +174,33 @@ export class RecipeEditForm implements OnInit {
     this.newImage = undefined;
   }
 
+  isInvalid(formControl: AbstractControl | null): boolean {
+    return (
+      formControl !== null &&
+      formControl.invalid &&
+      (formControl.dirty || formControl.touched)
+    );
+  }
+  isInvalidRecipe(name: string): boolean {
+    const formControl = this.recipeForm.get(name);
+    return this.isInvalid(formControl);
+  }
+  isInvalidSection(sIndex: number, name: string): boolean {
+    const formControl = this.recipeForm.controls.sections.at(sIndex).get(name);
+    return this.isInvalid(formControl);
+  }
+  isInvalidIngredient(sIndex: number, iIndex: number, name: string): boolean {
+    const formControl = this.recipeForm.controls.sections.at(sIndex).controls.ingredients.at(iIndex).get(name);
+    return this.isInvalid(formControl);
+  }
+  isInvalidDirection(sIndex: number, dIndex: number, name: string): boolean {
+    const formControl = this.recipeForm.controls.sections.at(sIndex).controls.directions.at(dIndex).get(name);
+    return this.isInvalid(formControl);
+  }
+
   // converts RecipeForm to Recipe and emits an event which updates recipes in app.html (or whatever passed it update)
   onSubmit() {
-    console.log('Form submitted: ', this.recipeForm.getRawValue());
+    console.log('Form submitted: ', this.recipeForm.getRawValue(), this.recipeForm.invalid);
     this.update.emit({
       id: this.recipe().id,
       name: this.recipeForm.controls.name.value,

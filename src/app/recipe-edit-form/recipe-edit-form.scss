@@ -36,6 +36,7 @@
     // general 
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap; // for .invalid::after
     justify-content: center;
     align-items: center;
     width: 85%;
@@ -49,6 +50,35 @@
     // general for immediate children
     > * {
       width: 100%;
+    }
+
+    // invalid message
+    .field,
+    .ingredient {
+      flex-wrap: wrap;
+    }
+    .invalid {
+      border: 1.5px solid red;
+      border-radius: 2px;
+    }
+    .invalid:focus-visible {
+      outline: 1.5px solid red;
+    }
+    .ingredient > .field:has(.invalid)::after,
+    .field:has(.invalid):not(.ingredient > .field)::after {
+      content: 'Invalid';
+      text-align: end;
+      color: red;
+      font-size: 0.85rem;
+    }
+    .field:has(.invalid):not(.ingredient > .field)::after {
+      flex-basis: 100%;
+    }
+    .ingredient > .field:has(.invalid)::after {
+      width: 100%;
+    }
+    .ingredient .field {
+      height: fit-content;
     }
 
     // max-width buttons
@@ -125,7 +155,7 @@
           align-items: stretch;
           
           button {
-            height: 50%;
+            height: 1.4rem;
           }
 
           .field {

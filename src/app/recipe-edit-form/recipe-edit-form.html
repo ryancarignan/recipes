@@ -8,12 +8,12 @@
 
     <div class="field name">
       <label for="name">Name: </label>
-      <input type="text" formControlName="name">
+      <input type="text" formControlName="name" [class.invalid]="isInvalidRecipe('name')">
     </div>
 
     <div class="field rating">
       <label for="rating">Rating: </label>
-      <input type="number" formControlName="rating">
+      <input type="number" formControlName="rating" [class.invalid]="isInvalidRecipe('rating')">
     </div>
 
     <div class="field image">
@@ -28,7 +28,7 @@
 
           <div class="field name">
             <label for="name">Name: </label>
-            <input type="text" formControlName="name">
+            <input type="text" formControlName="name" [class.invalid]="isInvalidSection(sIndex, 'name')">
           </div>
 
           <div class="ingredients" formArrayName="ingredients">
@@ -37,17 +37,17 @@
               <div class="ingredient" [formGroupName]="iIndex">
                 <div class="field quantity">
                   <label for="quantity">Quantity: </label>
-                  <input type="number" formControlName="quantity">
+                  <input type="number" formControlName="quantity" [class.invalid]="isInvalidIngredient(sIndex, iIndex, 'quantity')">
                 </div>
                 
                 <div class="field unit">
                   <label for="unit">Unit: </label>
-                  <input type="text" formControlName="unit">
+                  <input type="text" formControlName="unit" [class.invalid]="isInvalidIngredient(sIndex, iIndex, 'unit')">
                 </div>
 
                 <div class="field name">
                   <label for="name">Ingredient: </label>
-                  <input type="text" class="ingredient" formControlName="name">
+                  <input type="text" class="ingredient" formControlName="name" [class.invalid]="isInvalidIngredient(sIndex, iIndex, 'name')">
                 </div>
                 <button class="remove" type="button" (click)="removeIngredient(sIndex, iIndex)">X</button>
               </div>
@@ -61,7 +61,7 @@
               <div class="direction" [formGroupName]="dIndex">
                 <div class="field text">
                   <label for="direction">{{dIndex + 1}}. </label>
-                  <textarea class="direction" formControlName="text"></textarea>
+                  <textarea class="direction" formControlName="text" [class.invalid]="isInvalidDirection(sIndex, dIndex, 'text')"></textarea>
                 </div>
                 <button class="remove" type="button" (click)="removeDirection(sIndex, dIndex)">X</button>
               </div>
