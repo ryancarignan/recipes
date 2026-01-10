@@ -201,24 +201,26 @@ export class RecipeEditForm implements OnInit {
   // converts RecipeForm to Recipe and emits an event which updates recipes in app.html (or whatever passed it update)
   onSubmit() {
     console.log('Form submitted: ', this.recipeForm.getRawValue(), this.recipeForm.invalid);
-    this.update.emit({
-      id: this.recipe().id,
-      name: this.recipeForm.controls.name.value,
-      rating: this.recipeForm.controls.rating.value,
-      image: (this.newImage !== null) ? this.newImage : this.recipe().image,
-      sections: this.recipeForm.controls.sections.controls.map((s) => ({
-        name: s.controls.name.value,
-        ingredients: s.controls.ingredients.controls.map((i) => ({
-          name: i.controls.name.value,
-          unit: i.controls.unit.value,
-          quantity: i.controls.quantity.value
-        })),
-        directions: s.controls.directions.controls.map((d) => (
-          d.controls.text.value
-        ))
-      }))
-    });
-    this.beingEdited.set(false);
+    if (this.recipeForm.valid) {
+      this.update.emit({
+        id: this.recipe().id,
+        name: this.recipeForm.controls.name.value,
+        rating: this.recipeForm.controls.rating.value,
+        image: (this.newImage !== null) ? this.newImage : this.recipe().image,
+        sections: this.recipeForm.controls.sections.controls.map((s) => ({
+          name: s.controls.name.value,
+          ingredients: s.controls.ingredients.controls.map((i) => ({
+            name: i.controls.name.value,
+            unit: i.controls.unit.value,
+            quantity: i.controls.quantity.value
+          })),
+          directions: s.controls.directions.controls.map((d) => (
+            d.controls.text.value
+          ))
+        }))
+      });
+      this.beingEdited.set(false);
+    }
   }
 
   deleteRecipe() {
